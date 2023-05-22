@@ -1,50 +1,44 @@
 #include <Arduino.h>
 #include <time.h>
 
-#define red_led 21
-#define green_led 22
-#define blue_led 23
-#define LED_biult02 2
+#define red_led 9
+#define green_led 10
+#define blue_led 11
+#define LED_biult 13
 
-#define do_LED_OUT1 16
-#define do_LED_OUT2 17
-#define do_LED_OUT3 18
+#define do_LED_OUT1 5
+#define do_LED_OUT2 6
+#define do_LED_OUT3 7
 
-#define di_1 34
-#define di_2 35
-#define di_3 36
-#define di_4 39
+#define di_1 16  //
+#define di_2 17
+#define di_3 18
+#define di_4 19
 
 
 //declare variables for write_leds function of Serial communication
 char led_specifier;
 int led_brightness;
- 
-//LED_RGB
 void led_rgb(char led, int brightness);
 
 //LED_GUI_Button
 char buffer[10];
 bool isEqual(const char* cmd);
-void led_02_btn();
+
+void led_builtin();
 
 //LED_out
 void do_led_out1();
-
-//LED_input
-void di_input2();
+void do_led_out2();
 
 char di_2_state;
-
-//char *do_output[] = {"do_1", "do_2", "do_3", "do_4"};
-// void di_input2()
 
 void setup()
 {
   pinMode(red_led, OUTPUT);
   pinMode(green_led, OUTPUT);
   pinMode(blue_led, OUTPUT);
-  pinMode(LED_biult02, OUTPUT);
+  pinMode(LED_biult, OUTPUT);
 
   pinMode(do_LED_OUT1, OUTPUT);
 
@@ -61,27 +55,42 @@ void setup()
 
 void loop()
 {
-  while (Serial.available() == 0) {
+  while (true) {
 
     do_led_out1();
-    led_02_btn();
+    do_led_out2();
 
-    di_input2();
+    led_builtin();
+
     
     led_specifier = Serial.read();
     led_brightness = Serial.parseInt();
     // write_leds(led_specifier, led_brightness);
 
-    // if (Serial.available() ){
-    //   led_specifier = Serial.read();
-    //   led_brightness = Serial.parseInt();
-    led_rgb(led_specifier, led_brightness);
-      // }
-    // time sleep 0.001 sec
-
+    if (Serial.available() ){
+      led_specifier = Serial.read();
+      led_brightness = Serial.parseInt();
+      led_rgb(led_specifier, led_brightness);
+      Serial.println("OK");
+    }
+    delay(50);
   }
 }
-void di_input2()
+
+void do_led_out1()
+{
+  if (digitalRead(di_1) == HIGH){
+    digitalWrite(do_LED_OUT1, HIGH);
+    Serial.println("Input1 is HIGH");    
+  }
+  else{
+    digitalWrite(do_LED_OUT1, LOW);
+    Serial.println("Input1 is Low");
+  }
+  return;
+}
+
+void do_led_out2()
 {
   di_2_state = digitalRead(di_2);
   if (di_2_state == HIGH){
@@ -114,29 +123,17 @@ void led_rgb(char led, int brightness)
   delay(1);
 }
 
-void do_led_out1()
-{
-  if (digitalRead(di_1) == HIGH){
-    digitalWrite(do_LED_OUT1, HIGH);
-    Serial.println("Input1 is HIGH");    
-  }
-  else{
-    digitalWrite(do_LED_OUT1, LOW);
-    Serial.println("Input1 is Low");
-  }
-  return;
-}
 
 
-void led_02_btn()
+void led_builtin()
 {
     int length = Serial.readBytesUntil('\n', buffer, sizeof(buffer));
     buffer[length] = '\0';
     if (isEqual("on")) {
-      digitalWrite(LED_biult02, HIGH);
+      digitalWrite(LED_biult, HIGH);
       } 
     else if (isEqual("off")) {
-      digitalWrite(LED_biult02, LOW);
+      digitalWrite(LED_biult, LOW);
       }
    
 }

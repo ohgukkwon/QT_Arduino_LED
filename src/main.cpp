@@ -10,7 +10,7 @@
 #define do_LED_OUT2 6
 #define do_LED_OUT3 7
 
-#define di_1 16
+#define di_1 16  //
 #define di_2 17
 #define di_3 18
 #define di_4 19
@@ -19,24 +19,19 @@
 //declare variables for write_leds function of Serial communication
 char led_specifier;
 int led_brightness;
- 
-//LED_RGB
 void led_rgb(char led, int brightness);
 
 //LED_GUI_Button
 char buffer[10];
 bool isEqual(const char* cmd);
+
 void led_builtin();
 
 //LED_out
 void do_led_out1();
 void do_led_out2();
 
-
 char di_2_state;
-
-//char *do_output[] = {"do_1", "do_2", "do_3", "do_4"};
-// void di_input2()
 
 void setup()
 {
@@ -60,7 +55,7 @@ void setup()
 
 void loop()
 {
-  while (Serial.available() == 0) {
+  while (true) {
 
     do_led_out1();
     do_led_out2();
@@ -72,13 +67,13 @@ void loop()
     led_brightness = Serial.parseInt();
     // write_leds(led_specifier, led_brightness);
 
-    // if (Serial.available() ){
-    //   led_specifier = Serial.read();
-    //   led_brightness = Serial.parseInt();
-    led_rgb(led_specifier, led_brightness);
-      // }
-    // time sleep 0.001 sec
-
+    if (Serial.available() ){
+      led_specifier = Serial.read();
+      led_brightness = Serial.parseInt();
+      led_rgb(led_specifier, led_brightness);
+      Serial.println("OK");
+    }
+    delay(100);
   }
 }
 
@@ -147,48 +142,3 @@ bool isEqual(const char* cmd)
 {
     return strcmp(buffer, cmd) == 0;
 }
-
-// #define red_led 9
-// #define green_led 10
-// #define blue_led 11
-// #include <Arduino.h>
-
-// void write_leds(char led, int brightness);
-
-// void setup()
-// {
-//   pinMode(red_led, OUTPUT);
-//   pinMode(green_led, OUTPUT);
-//   pinMode(blue_led, OUTPUT);
-//   analogWrite(red_led, 0);   // set the brightness of the red LED 0-255
-//   analogWrite(green_led, 0);  // set the brightness of the red LED 0-255
-//   analogWrite(blue_led, 0);  // set the brightness of the red LED 0-255
-//   Serial.begin(9600);
-// }
-
-// void loop()
-// {
-//   if (Serial.available()){
-//     char led_specifier = Serial.read();
-//     int led_brightness = Serial.parseInt();
-//     write_leds(led_specifier, led_brightness);
-//   }
-// }
-
-// void write_leds(char led, int brightness)
-// {
-//   if (led == 'r'){
-//     analogWrite(red_led, brightness);  // 0 is Off, 255 is full brightness 
-//     return;
-//   }
-//   if (led == 'g'){
-//     analogWrite(green_led, brightness);  // 0 is Off, 255 is full brightness 
-//     return;
-//   }
-//   if (led == 'b'){
-//     analogWrite(blue_led, brightness); // 0 is Off, 255 is full brightness
-//     return;
-//   }
-  
-//   return;
-// }
