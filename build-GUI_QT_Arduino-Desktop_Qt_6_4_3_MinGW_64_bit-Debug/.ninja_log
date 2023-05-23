@@ -1,9 +1,9 @@
 # ninja log v5
 2	1345	7058149732606279	QT_Arduino_autogen/timestamp	f4137880823241a
+2	1345	7058149732606279	C:/Users/ohguk/OneDrive/Documents/Arduino/QT_Arduino_LED/build-GUI_QT_Arduino-Desktop_Qt_6_4_3_MinGW_64_bit-Debug/QT_Arduino_autogen/mocs_compilation.cpp	f4137880823241a
+1372	21444	7058149936964844	CMakeFiles/QT_Arduino.dir/dialog.cpp.obj	6a89fa9d3a498ec
 2	1345	7058149732606279	QT_Arduino_autogen/mocs_compilation.cpp	f4137880823241a
 2	1345	7058149732606279	C:/Users/ohguk/OneDrive/Documents/Arduino/QT_Arduino_LED/build-GUI_QT_Arduino-Desktop_Qt_6_4_3_MinGW_64_bit-Debug/QT_Arduino_autogen/timestamp	f4137880823241a
-2	1345	7058149732606279	C:/Users/ohguk/OneDrive/Documents/Arduino/QT_Arduino_LED/build-GUI_QT_Arduino-Desktop_Qt_6_4_3_MinGW_64_bit-Debug/QT_Arduino_autogen/mocs_compilation.cpp	f4137880823241a
+21458	22059	7058149943061194	QT_Arduino.exe	dbd84d9ad65fb5be
 1356	10674	7058149828977470	CMakeFiles/QT_Arduino.dir/main.cpp.obj	b35010263a39df60
 1346	10786	7058149830255540	CMakeFiles/QT_Arduino.dir/QT_Arduino_autogen/mocs_compilation.cpp.obj	1dcab3ae41569ce9
-1372	21444	7058149936964844	CMakeFiles/QT_Arduino.dir/dialog.cpp.obj	6a89fa9d3a498ec
-21458	22059	7058149943061194	QT_Arduino.exe	dbd84d9ad65fb5be
